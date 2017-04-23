@@ -1,0 +1,8 @@
+version: '2'
+
+services:
+  drinkup.webapi:
+    image: drinkup.webapi
+    build:
+      context: ./DrinkUp.WebApi
+      dockerfile: Dockerfile
