@@ -6,3 +6,4 @@ C:\Users\Barlo\Documents\DrinkUp\DrinkUp.WebApi\DrinkUp.WebApi\bin\Debug\netcore
 C:\Users\Barlo\Documents\DrinkUp\DrinkUp.WebApi\DrinkUp.WebApi\obj\Debug\netcoreapp1.1\DrinkUp.WebApi.AssemblyInfo.cs
 C:\Users\Barlo\Documents\DrinkUp\DrinkUp.WebApi\DrinkUp.WebApi\obj\Debug\netcoreapp1.1\DrinkUp.WebApi.dll
 C:\Users\Barlo\Documents\DrinkUp\DrinkUp.WebApi\DrinkUp.WebApi\obj\Debug\netcoreapp1.1\DrinkUp.WebApi.pdb
+C:\Users\Barlo\Documents\DrinkUp\DrinkUp.WebApi\DrinkUp.WebApi\obj\Debug\netcoreapp1.1\DrinkUp.WebApi.csprojResolveAssemblyReference.cache
