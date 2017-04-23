@@ -12,6 +12,7 @@ namespace DrinkUp.WebApi.Controllers {
             this.searchService = searchService;
         }
 
+        [HttpGet]
         public IActionResult Get(SearchViewModel viewModel = null) {
             return Ok(new {
                 Data = searchService.Search(viewModel)
