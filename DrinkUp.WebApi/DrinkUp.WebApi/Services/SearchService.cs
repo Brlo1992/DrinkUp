@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using DrinkUp.WebApi.Context;
 using DrinkUp.WebApi.ViewModels;
 
 namespace DrinkUp.WebApi.Services {
@@ -7,8 +9,20 @@ namespace DrinkUp.WebApi.Services {
     }
 
     public class SearchService : ISearchService {
-        public IList<SearchResultViewModel> Search(SearchViewModel viewModel) {
-            return new List<SearchResultViewModel>();
+        private readonly IMongoContext db;
+
+        public SearchService(IMongoContext db) {
+            this.db = db;
+        }
+        public IList<SearchResultViewModel> Search(SearchViewModel viewModel = null) {
+            return GetAll();
+        }
+
+        private List<SearchResultViewModel> GetAll() {
+            return db.GetAll()
+                .Select(x => new SearchResultViewModel {
+                    Name = x.Name
+                }).ToList();
         }
     }
 }
