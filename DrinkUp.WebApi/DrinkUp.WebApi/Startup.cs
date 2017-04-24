@@ -1,4 +1,5 @@
-﻿using DrinkUp.WebApi.Services;
+﻿using DrinkUp.WebApi.Context;
+using DrinkUp.WebApi.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -20,7 +21,9 @@ namespace DrinkUp.WebApi {
 
         public void ConfigureServices(IServiceCollection services) {
             services.AddMvc();
+            services.AddTransient<IMongoContext, MongoContext>();
             services.AddScoped<ISearchService, SearchService>();
+            services.AddScoped<IDrinkService, DrinkService>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory) {
