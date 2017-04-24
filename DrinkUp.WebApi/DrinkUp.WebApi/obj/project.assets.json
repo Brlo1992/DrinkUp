@@ -11010,15 +11010,13 @@
         }
       }
     },
-    "dependencies": {
-      "MongoDB.Driver": {
-        "target": "Package",
-        "version": "[2.4.3, )"
-      }
-    },
     "frameworks": {
       "netcoreapp1.1": {
         "dependencies": {
+          "MongoDB.Driver": {
+            "target": "Package",
+            "version": "2.4.3"
+          },
           "Microsoft.AspNetCore": {
             "target": "Package",
             "version": "1.1.1"
