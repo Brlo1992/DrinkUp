@@ -14,15 +14,12 @@ namespace DrinkUp.WebApi.Services {
         public SearchService(IMongoContext db) {
             this.db = db;
         }
-        public IList<SearchResultViewModel> Search(SearchViewModel viewModel = null) {
-            return GetAll();
-        }
 
-        private List<SearchResultViewModel> GetAll() {
-            return db.GetAll()
-                .Select(x => new SearchResultViewModel {
-                    Name = x.Name
-                }).ToList();
-        }
+        public IList<SearchResultViewModel> Search(SearchViewModel viewModel = null) => GetAll();
+
+        private List<SearchResultViewModel> GetAll() => db.GetAll()
+            .Select(x => new SearchResultViewModel {
+                Name = x.Name
+            }).ToList();
     }
 }

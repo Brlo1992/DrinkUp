@@ -6,7 +6,7 @@ namespace DrinkUp.WebApi.Controllers {
     [Produces("application/json")]
     [Route("api/Home")]
     public class HomeController : Controller {
-        readonly ISearchService searchService;
+        private readonly ISearchService searchService;
 
         public HomeController(ISearchService searchService) {
             this.searchService = searchService;

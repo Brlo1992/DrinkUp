@@ -1,17 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
-namespace DrinkUp.WebApi.Model.Service
-{
-    public class ServiceResult
-    {
-        public bool IsValid { get; private set; }
+namespace DrinkUp.WebApi.Model.Service {
+    public class ServiceResult {
+        public ServiceResult() {
+                
+        }
+        private IList<string> errors;
+        public bool IsValid => errors.Any();
+        public void AddError(string error) => errors.Add(error);
 
+        public void AddErrors(IList<string> errors) {
+            foreach (var error in errors) {
+                this.errors.Add(error);
+            }
+        }
     }
 
-    public class ServiceResult<T> {
+    public class ServiceResult<T> : ServiceResult {
         public T Data { get; set; }
     }
 }

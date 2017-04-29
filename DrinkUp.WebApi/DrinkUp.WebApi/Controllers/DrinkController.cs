@@ -14,7 +14,7 @@ namespace DrinkUp.WebApi.Controllers {
 
         [HttpPost]
         public IActionResult Post([FromBody]DrinkViewModel drink) {
-            drinkService.Add(drink);
+            var result = drinkService.Add(drink);
             return Ok();
         }
     }

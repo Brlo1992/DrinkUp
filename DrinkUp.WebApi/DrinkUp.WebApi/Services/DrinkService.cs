@@ -1,12 +1,15 @@
 ﻿using DrinkUp.WebApi.Context;
 using DrinkUp.WebApi.Model;
+using DrinkUp.WebApi.Model.Service;
 using DrinkUp.WebApi.ViewModels;
 
 namespace DrinkUp.WebApi.Services
 {
     public interface IDrinkService
     {
-        void Add(DrinkViewModel drink);
+        ServiceResult Add(DrinkViewModel drink);
+
+        ServiceResult Remove(IdentityViewModel identity);
     }
 
     public class DrinkService : IDrinkService
@@ -17,10 +20,17 @@ namespace DrinkUp.WebApi.Services
             this.db = db;
         }
 
-        public void Add(DrinkViewModel drink)
+        public ServiceResult Add(DrinkViewModel drink)
         {
+            var result = new ServiceResult();
             var newDrink = GetFromViewModel(drink);
             db.Insert(newDrink);
+            return result;  
+        }
+
+        public ServiceResult Remove(IdentityViewModel identity) {
+            var result = new ServiceResult();
+            db.Remove(identity.Id);
         }
 
         private Drink GetFromViewModel(DrinkViewModel viewModel)
