@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using DrinkUp.WebApi.Context;
+﻿using DrinkUp.WebApi.Context;
 using DrinkUp.WebApi.ViewModels;
+using System;
+using System.Collections.Generic;
 
 namespace DrinkUp.WebApi.Services {
     public interface ISearchService {
@@ -15,11 +15,6 @@ namespace DrinkUp.WebApi.Services {
             this.db = db;
         }
 
-        public IList<SearchResultViewModel> Search(SearchViewModel viewModel = null) => GetAll();
-
-        private List<SearchResultViewModel> GetAll() => db.GetAll()
-            .Select(x => new SearchResultViewModel {
-                Name = x.Name
-            }).ToList();
+        public IList<SearchResultViewModel> Search(SearchViewModel viewModel = null) => throw new NotImplementedException();
     }
 }

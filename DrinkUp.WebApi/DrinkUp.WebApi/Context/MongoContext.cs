@@ -3,7 +3,6 @@ using DrinkUp.WebApi.Model;
 using DrinkUp.WebApi.Model.Service;
 using MongoDB.Driver;
 using System.Linq;
-using static DrinkUp.WebApi.Extensions.MongoUpdateDefinitionExtension;
 
 namespace DrinkUp.WebApi.Context {
     public interface IMongoContext {

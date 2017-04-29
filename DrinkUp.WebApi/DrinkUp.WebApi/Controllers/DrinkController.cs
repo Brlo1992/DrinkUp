@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DrinkUp.WebApi.Controllers {
     [Produces("application/json")]
-    [Route("api/Drink")]
+    [Route("api/drink")]
     public class DrinkController : Controller {
         private readonly IDrinkService drinkService;
 
@@ -14,8 +14,7 @@ namespace DrinkUp.WebApi.Controllers {
 
         [HttpPost]
         public IActionResult Post([FromBody]DrinkViewModel drink) {
-            var result = drinkService.Add(drink);
-            return Ok();
+            return Ok(drinkService.Add(drink));
         }
     }
 }

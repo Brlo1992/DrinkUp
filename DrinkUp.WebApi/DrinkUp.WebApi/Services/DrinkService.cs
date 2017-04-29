@@ -22,15 +22,12 @@ namespace DrinkUp.WebApi.Services
 
         public ServiceResult Add(DrinkViewModel drink)
         {
-            var result = new ServiceResult();
             var newDrink = GetFromViewModel(drink);
-            db.Insert(newDrink);
-            return result;  
+            return db.Insert(newDrink);
         }
 
         public ServiceResult Remove(IdentityViewModel identity) {
-            var result = new ServiceResult();
-            db.Remove(identity.Id);
+            return db.Remove(identity.Id);
         }
 
         private Drink GetFromViewModel(DrinkViewModel viewModel)
@@ -43,5 +40,6 @@ namespace DrinkUp.WebApi.Services
                 Ingredients = viewModel.Ingredients,
             };
         }
+
     }
 }

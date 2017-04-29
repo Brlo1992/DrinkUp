@@ -7,7 +7,7 @@ namespace DrinkUp.WebApi.Model.Service {
             errors = new List<string>();
         }
         private readonly IList<string> errors;
-        public bool IsValid => errors.Any();
+        public bool IsValid => errors.Any() == false;
         public void AddError(string error) => errors.Add(error);
 
         public void AddErrors(IList<string> errors) {
