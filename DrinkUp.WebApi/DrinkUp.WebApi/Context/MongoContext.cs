@@ -7,13 +7,13 @@ using DrinkUp.WebApi.Model.Service;
 
 namespace DrinkUp.WebApi.Context {
     public interface IMongoContext {
-        IQueryable<Drink> GetAll();
+        ServiceResult<IQueryable<Drink>> GetAll();
 
-        Drink GetSingle(int id);
+        ServiceResult<Drink> GetSingle(int id);
 
         ServiceResult Insert(Drink drink);
 
-        ServiceResult Delete(int id);
+        ServiceResult Remove(int id);
 
         ServiceResult Update(Drink drink);
     }
@@ -27,30 +27,16 @@ namespace DrinkUp.WebApi.Context {
             db = client.GetDatabase("DrinkUpDb") as MongoDatabaseBase;
         }
 
-        public IQueryable<Drink> GetAll() => GetDrinkCollection().AsQueryable();
+        public ServiceResult<IQueryable<Drink>> GetAll() => GetDrinkCollection().GetMany();
 
-        public Drink GetSingle(int id) {
-            throw new NotImplementedException();
-        }
+        public ServiceResult<Drink> GetSingle(string name) => GetDrinkCollection().GetSingle(name);
 
-        public ServiceResult Insert(Drink drink) {
-            return GetDrinkCollection().TryInsert(drink);
-        }
+        public ServiceResult Insert(Drink drink) => GetDrinkCollection().TryInsert(drink);
 
-        public ServiceResult Delete(int id) {
-            throw new NotImplementedException();
-        }
+        public ServiceResult Update(Drink drink) => throw new NotImplementedException();
 
-        public ServiceResult Update(Drink drink) {
-            throw new NotImplementedException();
-        }
+        public ServiceResult Remove(int id) => GetDrinkCollection().TryDelete(id);
 
-        public ServiceResult Remove(int id) {
-            throw new NotImplementedException();
-        }
-
-        private IMongoCollection<Drink> GetDrinkCollection() {
-            return db.GetCollection<Drink>("Drinks");
-        }
+        private IMongoCollection<Drink> GetDrinkCollection() => db.GetCollection<Drink>("Drinks");
     }
 }
