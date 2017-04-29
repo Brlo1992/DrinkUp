@@ -4,9 +4,9 @@ using System.Linq;
 namespace DrinkUp.WebApi.Model.Service {
     public class ServiceResult {
         public ServiceResult() {
-                
+            errors = new List<string>();
         }
-        private IList<string> errors;
+        private readonly IList<string> errors;
         public bool IsValid => errors.Any();
         public void AddError(string error) => errors.Add(error);
 

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using MongoDB.Bson;
-using MongoDB.Driver;
+﻿using MongoDB.Driver;
 
 namespace DrinkUp.WebApi.Extensions {
     public static class MongoUpdateDefinitionExtension {
@@ -13,6 +8,5 @@ namespace DrinkUp.WebApi.Extensions {
                 .Set("name", "name")
                 .Set("","");
         }
-
     }
 }

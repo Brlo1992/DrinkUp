@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 
 namespace DrinkUp.WebApi.Model {
-    public class Drink {
+    public class Drink : IEntity{
         public int Id { get; set; }
         public string Name { get; set; }
         public IList<string> Ingredients { get; set; }

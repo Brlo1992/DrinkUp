@@ -1,10 +1,10 @@
-﻿using DrinkUp.WebApi.Model.Service;
+﻿using DrinkUp.WebApi.Model;
+using DrinkUp.WebApi.Model.Service;
 using MongoDB.Driver;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using MongoDB.Driver.Linq;
 using static DrinkUp.WebApi.Extensions.MongoBuildersExtension;
+using static DrinkUp.WebApi.Extensions.MongoUpdateDefinitionExtension;
 
 namespace DrinkUp.WebApi.Extensions {
     public static class MongoDbExtension {
@@ -52,14 +52,15 @@ namespace DrinkUp.WebApi.Extensions {
             return result;
         }
 
-        public static ServiceResult TryUpdate<T>(this IMongoCollection<T> db, T update, int id) {
+        public static ServiceResult TryUpdate<T>(this IMongoCollection<T> db, T update)
+            where T : IEntity {
             var result = new ServiceResult();
-            //try {
-            //    db.UpdateOne(GetById<T>(id),GetUpdateDefinitions(update));
-            //}
-            //catch (Exception ex) {
-            //    result.AddError(ex.Message);
-            //}
+            try {
+                db.UpdateOne(GetById<T>(update.Id), GetUpdateDefinitions(update));
+            }
+            catch (Exception ex) {
+                result.AddError(ex.Message);
+            }
             return result;
         }
 
