@@ -2,10 +2,12 @@
 using DrinkUp.WebApi.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using DrinkUp.WebApi.Model.Service;
 
 namespace DrinkUp.WebApi.Services {
     public interface ISearchService {
-        IList<SearchResultViewModel> Search(SearchViewModel viewModel);
+        ServiceResult<IQueryable<SearchResultViewModel>> Search(SearchViewModel viewModel);
     }
 
     public class SearchService : ISearchService {
@@ -15,6 +17,7 @@ namespace DrinkUp.WebApi.Services {
             this.db = db;
         }
 
-        public IList<SearchResultViewModel> Search(SearchViewModel viewModel = null) => throw new NotImplementedException();
+        public ServiceResult<IQueryable<SearchResultViewModel>> Search(SearchViewModel viewModel = null) =>
+            db.GetByCondiotion(viewModel);
     }
 }
