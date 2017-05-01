@@ -8,6 +8,8 @@ namespace DrinkUp.WebApi.Context {
     public interface IMongoContext {
         ServiceResult<IQueryable<Drink>> GetAll();
 
+        ServiceResult<IQueryable<Drink>> GetByContion(Drink drink);
+
         ServiceResult<Drink> GetSingle(string id);
 
         ServiceResult Insert(Drink drink);
@@ -27,6 +29,8 @@ namespace DrinkUp.WebApi.Context {
         }
 
         public ServiceResult<IQueryable<Drink>> GetAll() => Drinks.GetMany();
+
+        public ServiceResult<IQueryable<Drink>> GetByContion(Drink drink) => Drinks.GetByCondition(drink);
 
         public ServiceResult<Drink> GetSingle(string name) => Drinks.GetSingle(name);
 
