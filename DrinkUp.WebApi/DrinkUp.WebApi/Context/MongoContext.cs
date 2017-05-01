@@ -21,10 +21,9 @@ namespace DrinkUp.WebApi.Context {
 
     public class MongoContext : IMongoContext {
         private readonly MongoDatabaseBase db;
-        private readonly MongoClient client;
 
         public MongoContext() {
-            client = new MongoClient("mongodb://localhost:27017");
+            var client = new MongoClient("mongodb://localhost:27017");
             db = client.GetDatabase("DrinkUpDb") as MongoDatabaseBase;
         }
 

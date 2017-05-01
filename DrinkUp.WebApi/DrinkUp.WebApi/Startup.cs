@@ -21,6 +21,7 @@ namespace DrinkUp.WebApi {
 
         public void ConfigureServices(IServiceCollection services) {
             services.AddMvc();
+            services.AddCors();
             services.AddTransient<IMongoContext, MongoContext>();
             services.AddScoped<ISearchService, SearchService>();
             services.AddScoped<IDrinkService, DrinkService>();

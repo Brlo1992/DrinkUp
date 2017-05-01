@@ -26,9 +26,7 @@ namespace DrinkUp.WebApi.Services
             return db.Insert(newDrink);
         }
 
-        public ServiceResult Remove(IdentityViewModel identity) {
-            return db.Remove(identity.Id);
-        }
+        public ServiceResult Remove(IdentityViewModel identity) => db.Remove(identity.Id);
 
         private Drink GetFromViewModel(DrinkViewModel viewModel)
         {
@@ -40,6 +38,5 @@ namespace DrinkUp.WebApi.Services
                 Ingredients = viewModel.Ingredients,
             };
         }
-
     }
 }

@@ -3,7 +3,6 @@ using DrinkUp.WebApi.Model.Service;
 using DrinkUp.WebApi.ViewModels;
 using System.Linq;
 using DrinkUp.WebApi.Model;
-using static DrinkUp.WebApi.Extensions.MongoDrinkCollectionExtension;
 
 namespace DrinkUp.WebApi.Services {
     public interface ISearchService {
