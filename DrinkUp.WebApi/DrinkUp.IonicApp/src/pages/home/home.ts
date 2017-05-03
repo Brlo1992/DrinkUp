@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-
+﻿import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import { Account } from '../Account/account'
 
 @Component({
   selector: 'page-home',
