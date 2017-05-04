@@ -1,7 +1,5 @@
-﻿import { Component } from '@angular/core';
+﻿import { Component } from "@angular/core";
 import { NavController } from 'ionic-angular';
-import { Account } from '../Account/account'
-
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -9,9 +7,9 @@ import { Account } from '../Account/account'
 export class HomePage {
 
   constructor(public navCtrl: NavController) {
-    
+    // If we navigated to this page, we will have an item available as a nav param
   }
-  
+
   onLink(url: string) {
       window.open(url);
   }
