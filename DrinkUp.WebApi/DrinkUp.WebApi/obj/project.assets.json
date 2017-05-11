@@ -10991,15 +10991,15 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\dakr\\.nuget\\packages\\": {}
+    "C:\\Users\\Barlo\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\dakr\\Documents\\Repositories\\DrinkUp\\DrinkUp.WebApi\\DrinkUp.WebApi\\DrinkUp.WebApi.csproj",
+      "projectUniqueName": "C:\\Users\\Barlo\\Documents\\DrinkUp\\DrinkUp.WebApi\\DrinkUp.WebApi\\DrinkUp.WebApi.csproj",
       "projectName": "DrinkUp.WebApi",
-      "projectPath": "C:\\Users\\dakr\\Documents\\Repositories\\DrinkUp\\DrinkUp.WebApi\\DrinkUp.WebApi\\DrinkUp.WebApi.csproj",
-      "outputPath": "C:\\Users\\dakr\\Documents\\Repositories\\DrinkUp\\DrinkUp.WebApi\\DrinkUp.WebApi\\obj\\",
+      "projectPath": "C:\\Users\\Barlo\\Documents\\DrinkUp\\DrinkUp.WebApi\\DrinkUp.WebApi\\DrinkUp.WebApi.csproj",
+      "outputPath": "C:\\Users\\Barlo\\Documents\\DrinkUp\\DrinkUp.WebApi\\DrinkUp.WebApi\\obj\\",
       "projectStyle": "PackageReference",
       "originalTargetFrameworks": [
         "netcoreapp1.1"

@@ -1,4 +1,5 @@
-﻿using DrinkUp.WebApi.Context;
+﻿using System.Linq;
+using DrinkUp.WebApi.Context;
 using DrinkUp.WebApi.Model;
 using DrinkUp.WebApi.Model.Service;
 using DrinkUp.WebApi.ViewModels;
@@ -8,6 +9,12 @@ namespace DrinkUp.WebApi.Services {
         ServiceResult Add(DrinkViewModel drink);
 
         ServiceResult Remove(IdentityViewModel identity);
+
+        ServiceResult<IQueryable<Drink>> GetAll();
+
+        ServiceResult GetSingle(SearchViewModel viewModel);
+
+        ServiceResult Update(DrinkViewModel viewModel);
     }
 
     public class DrinkService : IDrinkService {
@@ -17,20 +24,23 @@ namespace DrinkUp.WebApi.Services {
             this.db = db;
         }
 
-        public ServiceResult Add(DrinkViewModel drink) {
-            var newDrink = GetFromViewModel(drink);
-            return db.Insert(newDrink);
+        public ServiceResult Add(DrinkViewModel viewModel) => db.Insert(GetFromViewModel(viewModel));
+
+        public ServiceResult Remove(IdentityViewModel viewModel) => db.Remove(viewModel.Id);
+
+        public ServiceResult<IQueryable<Drink>> GetAll() => db.GetAll();
+
+        public ServiceResult GetSingle( IdentityViewModel viewModel) => db.GetSingle(viewModel.Id);
+
+        public ServiceResult Update(DrinkViewModel viewModel) {
+            throw new System.NotImplementedException();
         }
 
-        public ServiceResult Remove(IdentityViewModel identity) => db.Remove(identity.Id);
-
-        private Drink GetFromViewModel(DrinkViewModel viewModel) {
-            return new Drink {
-                Name = viewModel.Name,
-                Description = viewModel.Description,
-                Glass = viewModel.Glass,
-                Ingredients = viewModel.Ingredients,
-            };
-        }
+        private Drink GetFromViewModel(DrinkViewModel viewModel) => new Drink {
+            Name = viewModel.Name,
+            Description = viewModel.Description,
+            Glass = viewModel.Glass,
+            Ingredients = viewModel.Ingredients,
+        };
     }
 }
