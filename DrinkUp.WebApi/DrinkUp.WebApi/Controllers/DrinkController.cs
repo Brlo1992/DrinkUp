@@ -39,6 +39,7 @@ namespace DrinkUp.WebApi.Controllers {
 
         //Update one
         [HttpPut]
-        public IActionResult Put()
+        public IActionResult Put(DrinkViewModel viewModel) =>
+            responseService.GetResponse(drinkService.Update(viewModel));
     }
 }

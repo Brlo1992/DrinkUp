@@ -36,7 +36,7 @@ namespace DrinkUp.WebApi.Services {
             throw new System.NotImplementedException();
         }
 
-        private Drink GetFromViewModel(DrinkViewModel viewModel) => new Drink {
+        private static Drink GetFromViewModel(DrinkViewModel viewModel) => new Drink {
             Name = viewModel.Name,
             Description = viewModel.Description,
             Glass = viewModel.Glass,
