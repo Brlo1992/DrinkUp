@@ -1,12 +1,3 @@
-C:\Users\Barlo\Documents\DrinkUp\DrinkUp.WebApi\DrinkUp.WebApi\bin\Debug\netcoreapp1.1\DrinkUp.WebApi.deps.json
-C:\Users\Barlo\Documents\DrinkUp\DrinkUp.WebApi\DrinkUp.WebApi\bin\Debug\netcoreapp1.1\DrinkUp.WebApi.runtimeconfig.json
-C:\Users\Barlo\Documents\DrinkUp\DrinkUp.WebApi\DrinkUp.WebApi\bin\Debug\netcoreapp1.1\DrinkUp.WebApi.runtimeconfig.dev.json
-C:\Users\Barlo\Documents\DrinkUp\DrinkUp.WebApi\DrinkUp.WebApi\bin\Debug\netcoreapp1.1\DrinkUp.WebApi.dll
-C:\Users\Barlo\Documents\DrinkUp\DrinkUp.WebApi\DrinkUp.WebApi\bin\Debug\netcoreapp1.1\DrinkUp.WebApi.pdb
-C:\Users\Barlo\Documents\DrinkUp\DrinkUp.WebApi\DrinkUp.WebApi\obj\Debug\netcoreapp1.1\DrinkUp.WebApi.AssemblyInfo.cs
-C:\Users\Barlo\Documents\DrinkUp\DrinkUp.WebApi\DrinkUp.WebApi\obj\Debug\netcoreapp1.1\DrinkUp.WebApi.dll
-C:\Users\Barlo\Documents\DrinkUp\DrinkUp.WebApi\DrinkUp.WebApi\obj\Debug\netcoreapp1.1\DrinkUp.WebApi.pdb
-C:\Users\Barlo\Documents\DrinkUp\DrinkUp.WebApi\DrinkUp.WebApi\obj\Debug\netcoreapp1.1\DrinkUp.WebApi.csprojResolveAssemblyReference.cache
 C:\Users\dakr\Documents\Repositories\DrinkUp\DrinkUp.WebApi\DrinkUp.WebApi\bin\Debug\netcoreapp1.1\DrinkUp.WebApi.deps.json
 C:\Users\dakr\Documents\Repositories\DrinkUp\DrinkUp.WebApi\DrinkUp.WebApi\bin\Debug\netcoreapp1.1\DrinkUp.WebApi.runtimeconfig.json
 C:\Users\dakr\Documents\Repositories\DrinkUp\DrinkUp.WebApi\DrinkUp.WebApi\bin\Debug\netcoreapp1.1\DrinkUp.WebApi.runtimeconfig.dev.json
@@ -15,3 +6,8 @@ C:\Users\dakr\Documents\Repositories\DrinkUp\DrinkUp.WebApi\DrinkUp.WebApi\bin\D
 C:\Users\dakr\Documents\Repositories\DrinkUp\DrinkUp.WebApi\DrinkUp.WebApi\obj\Debug\netcoreapp1.1\DrinkUp.WebApi.AssemblyInfo.cs
 C:\Users\dakr\Documents\Repositories\DrinkUp\DrinkUp.WebApi\DrinkUp.WebApi\obj\Debug\netcoreapp1.1\DrinkUp.WebApi.dll
 C:\Users\dakr\Documents\Repositories\DrinkUp\DrinkUp.WebApi\DrinkUp.WebApi\obj\Debug\netcoreapp1.1\DrinkUp.WebApi.pdb
+C:\Users\Barlo\Documents\DrinkUp\DrinkUp.WebApi\DrinkUp.WebApi\bin\Debug\netcoreapp1.1\DrinkUp.WebApi.deps.json
+C:\Users\Barlo\Documents\DrinkUp\DrinkUp.WebApi\DrinkUp.WebApi\bin\Debug\netcoreapp1.1\DrinkUp.WebApi.runtimeconfig.json
+C:\Users\Barlo\Documents\DrinkUp\DrinkUp.WebApi\DrinkUp.WebApi\bin\Debug\netcoreapp1.1\DrinkUp.WebApi.runtimeconfig.dev.json
+C:\Users\Barlo\Documents\DrinkUp\DrinkUp.WebApi\DrinkUp.WebApi\obj\Debug\netcoreapp1.1\DrinkUp.WebApi.csprojResolveAssemblyReference.cache
+C:\Users\Barlo\Documents\DrinkUp\DrinkUp.WebApi\DrinkUp.WebApi\obj\Debug\netcoreapp1.1\DrinkUp.WebApi.AssemblyInfo.cs

@@ -1,0 +1,4 @@
+C:\Users\Barlo\Documents\DrinkUp\DrinkUp.WebApi\DrinkUp.Tests.Unit\bin\Debug\netcoreapp1.1\DrinkUp.Tests.Unit.deps.json
+C:\Users\Barlo\Documents\DrinkUp\DrinkUp.WebApi\DrinkUp.Tests.Unit\bin\Debug\netcoreapp1.1\DrinkUp.Tests.Unit.dll
+C:\Users\Barlo\Documents\DrinkUp\DrinkUp.WebApi\DrinkUp.Tests.Unit\obj\Debug\netcoreapp1.1\DrinkUp.Tests.Unit.csprojResolveAssemblyReference.cache
+C:\Users\Barlo\Documents\DrinkUp\DrinkUp.WebApi\DrinkUp.Tests.Unit\obj\Debug\netcoreapp1.1\DrinkUp.Tests.Unit.AssemblyInfo.cs

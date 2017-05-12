@@ -12,7 +12,7 @@ namespace DrinkUp.WebApi.Services {
 
         ServiceResult<IQueryable<Drink>> GetAll();
 
-        ServiceResult GetSingle(SearchViewModel viewModel);
+        ServiceResult GetSingle(IdentityViewModel viewModel);
 
         ServiceResult Update(DrinkViewModel viewModel);
     }
