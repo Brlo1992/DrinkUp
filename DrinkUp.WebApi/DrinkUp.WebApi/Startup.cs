@@ -1,10 +1,14 @@
-﻿using DrinkUp.WebApi.Context;
+﻿using Autofac;
+using Autofac.Extensions.DependencyInjection;
+using DrinkUp.WebApi.Context;
 using DrinkUp.WebApi.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using System;
+using DrinkUp.WebApi.Utils;
 
 namespace DrinkUp.WebApi {
     public class Startup {
@@ -17,18 +21,32 @@ namespace DrinkUp.WebApi {
             Configuration = builder.Build();
         }
 
+        public IContainer Container { get; set; }
         public IConfigurationRoot Configuration { get; }
 
-        public void ConfigureServices(IServiceCollection services) {
+        public IServiceProvider ConfigureServices(IServiceCollection services) {
             services.AddMvc();
             services.AddCors();
-            services.AddTransient<IMongoContext, MongoContext>();
-            services.AddScoped<ISearchService, SearchService>();
-            services.AddScoped<IDrinkService, DrinkService>();
+
+            var builder = new ContainerBuilder();
+
+            builder.RegisterType<MongoContext>().AsImplementedInterfaces();
+            builder.RegisterType<SearchService>().AsImplementedInterfaces();
+            builder.RegisterType<DrinkService>().AsImplementedInterfaces();
+            builder.RegisterType<ResponseService>().AsImplementedInterfaces();
+            builder.Populate(services);
+
+            Container = builder.Build();
+
+            return new AutofacServiceProvider(Container);
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory) {
+        public void Configure(IApplicationBuilder app, 
+            IHostingEnvironment env, 
+            ILoggerFactory loggerFactory,
+            IApplicationLifetime appLifetime) {
             app.UseMvc();
+            appLifetime.ApplicationStopped.Register(() => Container.Dispose());
         }
     }
 }

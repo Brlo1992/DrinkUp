@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Threading.Tasks;
 using DrinkUp.WebApi.Context;
 using DrinkUp.WebApi.Model;
 using DrinkUp.WebApi.Model.Service;
@@ -6,15 +7,15 @@ using DrinkUp.WebApi.ViewModels;
 
 namespace DrinkUp.WebApi.Services {
     public interface IDrinkService {
-        ServiceResult Add(DrinkViewModel drink);
+        Task<ServiceResult> Add(DrinkViewModel drink);
 
-        ServiceResult Remove(IdentityViewModel identity);
+        Task<ServiceResult> Remove(IdentityViewModel identity);
 
         ServiceResult<IQueryable<Drink>> GetAll();
 
-        ServiceResult GetSingle(IdentityViewModel viewModel);
+        Task<ServiceResult<Drink>> GetSingle(NameViewModel viewModel);
 
-        ServiceResult Update(DrinkViewModel viewModel);
+        Task<ServiceResult> Update(DrinkViewModel viewModel);
     }
 
     public class DrinkService : IDrinkService {
@@ -24,15 +25,15 @@ namespace DrinkUp.WebApi.Services {
             this.db = db;
         }
 
-        public ServiceResult Add(DrinkViewModel viewModel) => db.Insert(GetFromViewModel(viewModel));
+        public Task<ServiceResult> Add(DrinkViewModel viewModel) => db.Insert(GetFromViewModel(viewModel));
 
-        public ServiceResult Remove(IdentityViewModel viewModel) => db.Remove(viewModel.Id);
+        public Task<ServiceResult> Remove(IdentityViewModel viewModel) => db.Remove(viewModel.Id);
 
         public ServiceResult<IQueryable<Drink>> GetAll() => db.GetAll();
 
-        public ServiceResult GetSingle( IdentityViewModel viewModel) => db.GetSingle(viewModel.Id);
+        public Task<ServiceResult<Drink>> GetSingle(NameViewModel viewModel) => db.GetSingle(viewModel.Name);
 
-        public ServiceResult Update(DrinkViewModel viewModel) {
+        public Task<ServiceResult> Update(DrinkViewModel viewModel) {
             throw new System.NotImplementedException();
         }
 

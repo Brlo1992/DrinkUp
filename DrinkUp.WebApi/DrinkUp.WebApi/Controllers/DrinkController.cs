@@ -1,9 +1,8 @@
-using System.Linq;
-using DrinkUp.WebApi.Model.Service;
 using DrinkUp.WebApi.Services;
 using DrinkUp.WebApi.Utils;
 using DrinkUp.WebApi.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace DrinkUp.WebApi.Controllers {
     [Produces("application/json")]
@@ -19,9 +18,11 @@ namespace DrinkUp.WebApi.Controllers {
             this.responseService = responseService;
         }
 
-        [HttpGet]
-        public IActionResult Get(SearchViewModel viewModel) =>
-            responseService.GetResponse(drinkService.GetSingle(viewModel));
+        [HttpGet("{viewModel}")]
+        public async Task<IActionResult> Get(NameViewModel viewModel) {
+            var result = await drinkService.GetSingle(viewModel);
+            return  responseService.GetResponse(result);
+        }
 
         [HttpGet]
         public IActionResult Get() =>
@@ -29,17 +30,23 @@ namespace DrinkUp.WebApi.Controllers {
 
         //Add one
         [HttpPost]
-        public IActionResult Post([FromBody] DrinkViewModel viewModel) =>
-            responseService.GetResponse(drinkService.Add(viewModel));
+        public async Task<IActionResult> Post([FromBody] DrinkViewModel viewModel) {
+            var result = await drinkService.Add(viewModel);
+            return responseService.GetResponse(result);
+        }
 
         //Delete one
         [HttpDelete]
-        public IActionResult Delete(IdentityViewModel viewModel) =>
-            responseService.GetResponse(drinkService.Remove(viewModel));
+        public async Task<IActionResult> Delete(IdentityViewModel viewModel) {
+            var result = await drinkService.Remove(viewModel);
+            return responseService.GetResponse(result);
+        }
 
         //Update one
         [HttpPut]
-        public IActionResult Put(DrinkViewModel viewModel) =>
-            responseService.GetResponse(drinkService.Update(viewModel));
+        public async Task<IActionResult> Put([FromBody] DrinkViewModel viewModel) {
+            var result = await drinkService.Update(viewModel);
+            return responseService.GetResponse(result);
+        }
     }
 }

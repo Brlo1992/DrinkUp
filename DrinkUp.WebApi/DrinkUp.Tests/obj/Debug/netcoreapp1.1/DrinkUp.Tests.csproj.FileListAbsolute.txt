@@ -5,8 +5,10 @@ C:\Users\Barlo\Documents\DrinkUp\DrinkUp.WebApi\DrinkUp.Tests\bin\Debug\netcorea
 C:\Users\Barlo\Documents\DrinkUp\DrinkUp.WebApi\DrinkUp.Tests\bin\Debug\netcoreapp1.1\DrinkUp.Tests.runtimeconfig.json
 C:\Users\Barlo\Documents\DrinkUp\DrinkUp.WebApi\DrinkUp.Tests\bin\Debug\netcoreapp1.1\DrinkUp.Tests.runtimeconfig.dev.json
 C:\Users\Barlo\Documents\DrinkUp\DrinkUp.WebApi\DrinkUp.Tests\bin\Debug\netcoreapp1.1\DrinkUp.Tests.dll
-C:\Users\Barlo\Documents\DrinkUp\DrinkUp.WebApi\DrinkUp.Tests\bin\Debug\netcoreapp1.1\DrinkUp.Tests.pdb
 C:\Users\Barlo\Documents\DrinkUp\DrinkUp.WebApi\DrinkUp.Tests\obj\Debug\netcoreapp1.1\DrinkUp.Tests.csprojResolveAssemblyReference.cache
 C:\Users\Barlo\Documents\DrinkUp\DrinkUp.WebApi\DrinkUp.Tests\obj\Debug\netcoreapp1.1\DrinkUp.Tests.AssemblyInfo.cs
+C:\Users\Barlo\Documents\DrinkUp\DrinkUp.WebApi\DrinkUp.Tests\bin\Debug\netcoreapp1.1\DrinkUp.Tests.pdb
 C:\Users\Barlo\Documents\DrinkUp\DrinkUp.WebApi\DrinkUp.Tests\obj\Debug\netcoreapp1.1\DrinkUp.Tests.dll
 C:\Users\Barlo\Documents\DrinkUp\DrinkUp.WebApi\DrinkUp.Tests\obj\Debug\netcoreapp1.1\DrinkUp.Tests.pdb
+C:\Users\Barlo\Documents\DrinkUp\DrinkUp.WebApi\DrinkUp.Tests\bin\Debug\netcoreapp1.1\DrinkUp.WebApi.dll
+C:\Users\Barlo\Documents\DrinkUp\DrinkUp.WebApi\DrinkUp.Tests\bin\Debug\netcoreapp1.1\DrinkUp.WebApi.pdb

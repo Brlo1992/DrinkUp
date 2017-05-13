@@ -14,7 +14,7 @@ namespace DrinkUp.WebApi.Utils {
         }
 
         public ObjectResult GetResponse<T>(ServiceResult<T> serviceResult) {
-            throw new NotImplementedException();
+            return new OkObjectResult(serviceResult);
         }
     }
 }

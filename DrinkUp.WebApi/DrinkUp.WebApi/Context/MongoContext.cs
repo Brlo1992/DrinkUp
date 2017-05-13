@@ -3,6 +3,7 @@ using DrinkUp.WebApi.Model;
 using DrinkUp.WebApi.Model.Service;
 using MongoDB.Driver;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace DrinkUp.WebApi.Context {
     public interface IMongoContext {
@@ -10,13 +11,13 @@ namespace DrinkUp.WebApi.Context {
 
         ServiceResult<IQueryable<Drink>> GetByCondition(Drink drink);
 
-        ServiceResult<Drink> GetSingle(string id);
+        Task<ServiceResult<Drink>> GetSingle(string id);
 
-        ServiceResult Insert(Drink drink);
+        Task<ServiceResult> Insert(Drink drink);
 
-        ServiceResult Remove(int id);
+        Task<ServiceResult> Remove(int id);
 
-        ServiceResult Update(Drink drink);
+        Task<ServiceResult> Update(Drink drink);
     }
 
     public class MongoContext : IMongoContext {
@@ -31,13 +32,13 @@ namespace DrinkUp.WebApi.Context {
 
         public ServiceResult<IQueryable<Drink>> GetByCondition(Drink drink) => Drinks.GetByCondition(drink);
 
-        public ServiceResult<Drink> GetSingle(string name) => Drinks.GetSingle(name);
-
-        public ServiceResult Insert(Drink drink) => Drinks.TryInsert(drink);
-
-        public ServiceResult Update(Drink drink) => Drinks.TryUpdate(drink);
-
-        public ServiceResult Remove(int id) => Drinks.TryDelete(id);
+        public async Task<ServiceResult<Drink>> GetSingle(string name) => await Drinks.GetSingle(name);
+               
+        public async Task<ServiceResult> Insert(Drink drink) => await Drinks.TryInsert(drink);
+               
+        public async Task<ServiceResult> Update(Drink drink) => await Drinks.TryUpdate(drink);
+               
+        public async Task<ServiceResult> Remove(int id) => await Drinks.TryDelete(id);
 
         private IMongoCollection<Drink> Drinks => db.GetCollection<Drink>("Drinks");
     }

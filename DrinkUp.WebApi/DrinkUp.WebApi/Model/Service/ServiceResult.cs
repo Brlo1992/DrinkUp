@@ -14,10 +14,10 @@ namespace DrinkUp.WebApi.Model.Service {
         public void AddError(string error) => Errors.Add(error);
 
         public void AddErrors(IList<string> errors) {
-            if (errors.Any())
-                foreach (var error in errors) {
-                    this.Errors.Add(error);
-                }
+            if (!errors.Any()) return;
+            foreach (var error in errors) {
+                Errors.Add(error);
+            }
         }
     }
 
