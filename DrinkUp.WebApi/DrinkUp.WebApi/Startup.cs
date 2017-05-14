@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
 using DrinkUp.WebApi.Utils;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace DrinkUp.WebApi {
     public class Startup {
@@ -27,6 +28,10 @@ namespace DrinkUp.WebApi {
         public IServiceProvider ConfigureServices(IServiceCollection services) {
             services.AddMvc();
             services.AddCors();
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info { Title = "My API", Version = "v1" });
+            });
 
             var builder = new ContainerBuilder();
 
@@ -46,6 +51,11 @@ namespace DrinkUp.WebApi {
             ILoggerFactory loggerFactory,
             IApplicationLifetime appLifetime) {
             app.UseMvc();
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+            });
             appLifetime.ApplicationStopped.Register(() => Container.Dispose());
         }
     }

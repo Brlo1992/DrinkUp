@@ -1,7 +1,8 @@
 {
   "runtimeOptions": {
     "additionalProbingPaths": [
-      "C:\\Users\\Barlo\\.nuget\\packages"
+      "C:\\Users\\dakr\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\dakr\\.nuget\\packages"
     ]
   }
 }
