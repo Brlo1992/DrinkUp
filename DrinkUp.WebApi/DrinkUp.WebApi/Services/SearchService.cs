@@ -26,8 +26,7 @@ namespace DrinkUp.WebApi.Services {
         private ServiceResult<IQueryable<SearchResultViewModel>> GetFormatedResult(ServiceResult<IQueryable<Drink>> result) {
             var formatedResult = new ServiceResult<IQueryable<SearchResultViewModel>> {
                 Data = result.Data.Select(x => new SearchResultViewModel {
-                    Name = x.Name,
-                    Id = x.Id
+                    Name = x.Name
                 })
             };
             formatedResult.AddErrors(result.Errors);

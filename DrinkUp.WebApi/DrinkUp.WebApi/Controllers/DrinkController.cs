@@ -18,10 +18,12 @@ namespace DrinkUp.WebApi.Controllers {
             this.responseService = responseService;
         }
 
-        [HttpGet("{viewModel}")]
-        public async Task<IActionResult> Get(NameViewModel viewModel) {
-            var result = await drinkService.GetSingle(viewModel);
-            return  responseService.GetResponse(result);
+        [HttpGet("{name}", Name = "GetById")]
+        public async Task<IActionResult> Get(string name) {
+            var result = await drinkService.GetSingle(new NameViewModel {
+                Name = name
+            });
+            return responseService.GetResponse(result);
         }
 
         [HttpGet]
@@ -37,7 +39,7 @@ namespace DrinkUp.WebApi.Controllers {
 
         //Delete one
         [HttpDelete]
-        public async Task<IActionResult> Delete(IdentityViewModel viewModel) {
+        public async Task<IActionResult> Delete([FromBody] IdentityViewModel viewModel) {
             var result = await drinkService.Remove(viewModel);
             return responseService.GetResponse(result);
         }

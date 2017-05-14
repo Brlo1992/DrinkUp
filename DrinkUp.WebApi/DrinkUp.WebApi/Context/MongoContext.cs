@@ -15,7 +15,7 @@ namespace DrinkUp.WebApi.Context {
 
         Task<ServiceResult> Insert(Drink drink);
 
-        Task<ServiceResult> Remove(int id);
+        Task<ServiceResult> Remove(string id);
 
         Task<ServiceResult> Update(Drink drink);
     }
@@ -38,7 +38,7 @@ namespace DrinkUp.WebApi.Context {
                
         public async Task<ServiceResult> Update(Drink drink) => await Drinks.TryUpdate(drink);
                
-        public async Task<ServiceResult> Remove(int id) => await Drinks.TryDelete(id);
+        public async Task<ServiceResult> Remove(string id) => await Drinks.TryDelete(id);
 
         private IMongoCollection<Drink> Drinks => db.GetCollection<Drink>("Drinks");
     }

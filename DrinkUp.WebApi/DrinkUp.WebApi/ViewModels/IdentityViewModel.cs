@@ -1,5 +1,5 @@
 ﻿namespace DrinkUp.WebApi.ViewModels {
     public class IdentityViewModel {
-        public int Id { get; set; }
+        public string Id { get; set; }
     }
 }

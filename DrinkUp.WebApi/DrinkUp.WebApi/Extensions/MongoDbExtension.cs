@@ -5,7 +5,6 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using static DrinkUp.WebApi.Extensions.MongoBuildersExtension;
-using static DrinkUp.WebApi.Extensions.MongoUpdateDefinitionExtension;
 
 namespace DrinkUp.WebApi.Extensions {
     public static class MongoDbExtension {
@@ -37,9 +36,7 @@ namespace DrinkUp.WebApi.Extensions {
         public static async Task<ServiceResult> TryInsert<T>(this IMongoCollection<T> db, T item) where T : IEntity {
             var result = new ServiceResult();
             try {
-                await db.FindOneAndUpdateAsync(GetByName<T>(item.Name),
-                    GetUpdateDefinitions(item),
-                    GetFindOneAndUpdateOptions<T>());
+                await db.InsertOneAsync(item);
             }
             catch (Exception ex) {
                 result.AddError(ex.Message);
@@ -47,13 +44,7 @@ namespace DrinkUp.WebApi.Extensions {
             return result;
         }
 
-        private static FindOneAndUpdateOptions<T> GetFindOneAndUpdateOptions<T>() where T : IEntity {
-            return new FindOneAndUpdateOptions<T> {
-                IsUpsert = true
-            };
-        }
-
-        public static async Task<ServiceResult> TryDelete<T>(this IMongoCollection<T> db, int id) {
+        public static async Task<ServiceResult> TryDelete<T>(this IMongoCollection<T> db, string id) {
             var result = new ServiceResult();
             try {
                 await db.FindOneAndDeleteAsync(GetById<T>(id));
@@ -67,12 +58,12 @@ namespace DrinkUp.WebApi.Extensions {
         public static async Task<ServiceResult> TryUpdate<T>(this IMongoCollection<T> db, T update)
             where T : IEntity {
             var result = new ServiceResult();
-            try {
-                await db.FindOneAndUpdateAsync(GetById<T>(update.Id), GetUpdateDefinitions(update));
-            }
-            catch (Exception ex) {
-                result.AddError(ex.Message);
-            }
+            //try {
+            //    await db.FindOneAndUpdateAsync(GetById<T>(update.Id), GetUpdateDefinitions(update));
+            //}
+            //catch (Exception ex) {
+            //    result.AddError(ex.Message);
+            //}
             return result;
         }
 

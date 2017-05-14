@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
+using MongoDB.Bson;
 
 namespace DrinkUp.WebApi.Model {
     public class Drink : IEntity{
-        public int Id { get; set; }
+        public ObjectId Id { get; set; }
         public string Name { get; set; }
         public IList<string> Ingredients { get; set; }
         public string Glass { get; set; }

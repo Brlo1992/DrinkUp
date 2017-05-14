@@ -1,6 +1,8 @@
-﻿namespace DrinkUp.WebApi.Model {
+﻿using MongoDB.Bson;
+
+namespace DrinkUp.WebApi.Model {
     public interface IEntity {
-        int Id { get; set; }
+        ObjectId Id { get; set; }
         string Name { get; set; }
     }
 }
