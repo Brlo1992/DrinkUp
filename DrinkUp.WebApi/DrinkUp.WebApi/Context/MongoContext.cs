@@ -32,7 +32,7 @@ namespace DrinkUp.WebApi.Context {
 
         public ServiceResult<IQueryable<Drink>> GetByCondition(Drink drink) => Drinks.GetByCondition(drink);
 
-        public async Task<ServiceResult<Drink>> GetSingle(string name) => await Drinks.GetSingle(name);
+        public async Task<ServiceResult<Drink>> GetSingle(string id) => await Drinks.GetSingle(id);
                
         public async Task<ServiceResult> Insert(Drink drink) => await Drinks.TryInsert(drink);
                

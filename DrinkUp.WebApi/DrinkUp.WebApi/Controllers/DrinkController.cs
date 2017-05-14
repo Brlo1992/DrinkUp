@@ -18,10 +18,10 @@ namespace DrinkUp.WebApi.Controllers {
             this.responseService = responseService;
         }
 
-        [HttpGet("{name}", Name = "GetById")]
-        public async Task<IActionResult> Get(string name) {
-            var result = await drinkService.GetSingle(new NameViewModel {
-                Name = name
+        [HttpGet("{objectId}", Name = "GetById")]
+        public async Task<IActionResult> Get(string objectId) {
+            var result = await drinkService.GetSingle(new IdentityViewModel {
+                Id = objectId
             });
             return responseService.GetResponse(result);
         }

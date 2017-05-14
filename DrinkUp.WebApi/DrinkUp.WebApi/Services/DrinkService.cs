@@ -13,7 +13,7 @@ namespace DrinkUp.WebApi.Services {
 
         ServiceResult<IQueryable<Drink>> GetAll();
 
-        Task<ServiceResult<Drink>> GetSingle(NameViewModel viewModel);
+        Task<ServiceResult<Drink>> GetSingle(IdentityViewModel viewModel);
 
         Task<ServiceResult> Update(DrinkViewModel viewModel);
     }
@@ -31,7 +31,7 @@ namespace DrinkUp.WebApi.Services {
 
         public ServiceResult<IQueryable<Drink>> GetAll() => db.GetAll();
 
-        public Task<ServiceResult<Drink>> GetSingle(NameViewModel viewModel) => db.GetSingle(viewModel.Name);
+        public Task<ServiceResult<Drink>> GetSingle(IdentityViewModel viewModel) => db.GetSingle(viewModel.Id);
 
         public Task<ServiceResult> Update(DrinkViewModel viewModel) {
             throw new System.NotImplementedException();

@@ -19,13 +19,11 @@ namespace DrinkUp.WebApi.Extensions {
             return result;
         }
 
-        public static async Task<ServiceResult<T>> GetSingle<T>(this IMongoCollection<T> db, string name) where T : new() {
+        public static async Task<ServiceResult<T>> GetSingle<T>(this IMongoCollection<T> db, string id) where T : new() {
             var result = new ServiceResult<T>();
             try {
-                var queryResult = await db.FindAsync(GetByName<T>(name)).ToAsyncEnumerable().First();
-                result.Data = queryResult.Current.Any() ? 
-                    queryResult.Current.First() : 
-                    new T();
+                var queryResult = await db.Find(GetById<T>(id)).ToListAsync();
+                result.Data = queryResult.First();
             }
             catch (Exception ex) {
                 result.AddError(ex.Message);
