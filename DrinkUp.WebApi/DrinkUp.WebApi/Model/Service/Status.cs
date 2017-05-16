@@ -7,6 +7,7 @@
         OneSelected,
         ManySelected,
         AlreadyExist,
-        NotExist
+        NotExist,
+        FindMoreThanOne
     }
 }

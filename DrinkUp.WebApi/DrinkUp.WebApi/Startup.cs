@@ -32,7 +32,7 @@ namespace DrinkUp.WebApi {
 
             builder.Register(c => new MongoContext(
                     ConfigrationProvider.GetMongoConnection(Configuration),
-                    ConfigrationProvider.GetMongoConnection(Configuration)))
+                    ConfigrationProvider.GetMongoCollection(Configuration)))
                 .AsImplementedInterfaces();
             builder.RegisterType<SearchService>().AsImplementedInterfaces();
             builder.RegisterType<DrinkService>().AsImplementedInterfaces();

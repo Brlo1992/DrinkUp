@@ -26,8 +26,13 @@ namespace DrinkUp.WebApi.Extensions {
             var result = SimpleFactory<ServiceResult<T>>.Create();
             try {
                 var queryResult = await db.Find(GetById<T>(id)).ToListAsync();
-                result.Data = queryResult.First();
-                result.Status = nameof(Status.OneSelected);
+                if (queryResult.IsOneSelected()) {
+                    result.Data = queryResult.First();
+                    result.Status = nameof(Status.OneSelected);
+                }
+                else {
+                    result.Status = nameof(Status.FindMoreThanOne);
+                }
             }
             catch (Exception ex) {
                 result.AddError(ex.Message);
@@ -40,14 +45,13 @@ namespace DrinkUp.WebApi.Extensions {
             var result = SimpleFactory<ServiceResult<T>>.Create();
             try {
                 var queryResult = await db.Find(GetByName<T>(item.Name)).ToListAsync();
-                if (queryResult.Any()) {
-                    result.Status = nameof(Status.AlreadyExist);
-                }
-                else {
+                if (queryResult.IsEmpty()) {
                     await db.InsertOneAsync(item);
                     result.Status = nameof(Status.Added);
                 }
-
+                else {
+                    result.Status = nameof(Status.AlreadyExist);
+                }
             }
             catch (Exception ex) {
                 result.AddError(ex.Message);
@@ -69,13 +73,17 @@ namespace DrinkUp.WebApi.Extensions {
             return result;
         }
 
-        public static async Task<ServiceResult> TryUpdate<T>(this IMongoCollection<T> db,
-            string id,
-            UpdateDefinition<T> updateDefinition)
-            where T : IEntity {
+        public static async Task<ServiceResult> TryUpdate<T>(this IMongoCollection<T> db,string id, UpdateDefinition<T> updateDefinition) where T : IEntity {
             var result = SimpleFactory<ServiceResult<T>>.Create();
             try {
-                await db.FindOneAndUpdateAsync(GetById<T>(id), updateDefinition);
+                var queryResult = await db.Find(GetByName<T>(id)).ToListAsync();
+                if (queryResult.IsOneSelected()) {
+                    await db.FindOneAndUpdateAsync(GetById<T>(id), updateDefinition);
+                    result.Status = nameof(Status.Updated);
+                }
+                else {
+                    result.Status = nameof(Status.FindMoreThanOne);
+                }
             }
             catch (Exception ex) {
                 result.AddError(ex.Message);

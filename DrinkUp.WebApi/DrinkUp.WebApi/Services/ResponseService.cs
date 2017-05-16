@@ -1,8 +1,7 @@
 ﻿using DrinkUp.WebApi.Model.Service;
 using Microsoft.AspNetCore.Mvc;
-using System;
 
-namespace DrinkUp.WebApi.Utils {
+namespace DrinkUp.WebApi.Services {
     public interface IResponseService {
         ObjectResult GetResponse(ServiceResult serviceResult);
 

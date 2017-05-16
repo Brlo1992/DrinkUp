@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using DrinkUp.WebApi.Utils;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace DrinkUp.WebApi.Model.Service {
     public class ServiceResult {
         public ServiceResult() {
-            Errors = new List<string>();
+            Errors = SimpleFactory<List<string>>.Create();
         }
         
         public string Status { get; set; }
