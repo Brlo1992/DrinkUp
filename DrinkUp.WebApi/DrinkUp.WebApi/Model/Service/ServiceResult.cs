@@ -6,6 +6,8 @@ namespace DrinkUp.WebApi.Model.Service {
         public ServiceResult() {
             Errors = new List<string>();
         }
+        
+        public string Status { get; set; }
 
         public bool IsValid => Errors.Any() == false;
 

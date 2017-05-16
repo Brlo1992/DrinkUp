@@ -17,15 +17,15 @@ namespace DrinkUp.WebApi.Context {
 
         Task<ServiceResult> Remove(string id);
 
-        Task<ServiceResult> Update(Drink drink);
+        Task<ServiceResult> Update(string id, UpdateDefinition<Drink> updateDefinition);
     }
 
     public class MongoContext : IMongoContext {
         private readonly MongoDatabaseBase db;
 
-        public MongoContext() {
-            var client = new MongoClient("mongodb://localhost:27017");
-            db = client.GetDatabase("DrinkUpDb") as MongoDatabaseBase;
+        public MongoContext(string mongoConnection, string mongoCollection) {
+            var client = new MongoClient(mongoConnection);
+            db = client.GetDatabase(mongoCollection) as MongoDatabaseBase;
         }
 
         public ServiceResult<IQueryable<Drink>> GetAll() => Drinks.GetMany();
@@ -36,7 +36,7 @@ namespace DrinkUp.WebApi.Context {
                
         public async Task<ServiceResult> Insert(Drink drink) => await Drinks.TryInsert(drink);
                
-        public async Task<ServiceResult> Update(Drink drink) => await Drinks.TryUpdate(drink);
+        public async Task<ServiceResult> Update(string id, UpdateDefinition<Drink> updateDefinition) => await Drinks.TryUpdate(id, updateDefinition);
                
         public async Task<ServiceResult> Remove(string id) => await Drinks.TryDelete(id);
 

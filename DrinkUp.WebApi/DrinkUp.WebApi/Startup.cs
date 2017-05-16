@@ -15,7 +15,7 @@ namespace DrinkUp.WebApi {
         public Startup(IHostingEnvironment env) {
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("appsettings.json", true, true)
+                .AddJsonFile("appsettings.json", false, true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", true)
                 .AddEnvironmentVariables();
             Configuration = builder.Build();
@@ -30,7 +30,10 @@ namespace DrinkUp.WebApi {
 
             var builder = new ContainerBuilder();
 
-            builder.RegisterType<MongoContext>().AsImplementedInterfaces();
+            builder.Register(c => new MongoContext(
+                    ConfigrationProvider.GetMongoConnection(Configuration),
+                    ConfigrationProvider.GetMongoConnection(Configuration)))
+                .AsImplementedInterfaces();
             builder.RegisterType<SearchService>().AsImplementedInterfaces();
             builder.RegisterType<DrinkService>().AsImplementedInterfaces();
             builder.RegisterType<ResponseService>().AsImplementedInterfaces();
