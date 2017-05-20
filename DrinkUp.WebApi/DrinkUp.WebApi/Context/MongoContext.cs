@@ -1,11 +1,10 @@
-﻿using System.Collections.Generic;
-using DrinkUp.WebApi.Extensions;
+﻿using DrinkUp.WebApi.Extensions;
 using DrinkUp.WebApi.Model;
 using DrinkUp.WebApi.Model.Service;
-using MongoDB.Driver;
-using System.Linq;
-using System.Threading.Tasks;
 using DrinkUp.WebApi.ViewModels;
+using MongoDB.Driver;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace DrinkUp.WebApi.Context {
     public interface IMongoContext {

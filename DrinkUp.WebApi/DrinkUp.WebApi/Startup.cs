@@ -2,13 +2,15 @@
 using Autofac.Extensions.DependencyInjection;
 using DrinkUp.WebApi.Context;
 using DrinkUp.WebApi.Services;
+using DrinkUp.WebApi.Utils;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
-using DrinkUp.WebApi.Utils;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace DrinkUp.WebApi {
     public class Startup {
@@ -18,6 +20,7 @@ namespace DrinkUp.WebApi {
                 .AddJsonFile("appsettings.json", false, true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", true)
                 .AddEnvironmentVariables();
+
             Configuration = builder.Build();
         }
 
@@ -27,7 +30,12 @@ namespace DrinkUp.WebApi {
         public IServiceProvider ConfigureServices(IServiceCollection services) {
             services.AddMvc();
             services.AddCors();
-
+            services
+                .AddEntityFrameworkSqlServer()
+                .AddDbContext<IdentityContext>(options => {
+                    options.UseSqlServer(ConfigrationProvider.GetIdentityConnection(Configuration));                    
+                });
+            services.AddIdentity<IdentityUser, IdentityRole>();
             var builder = new ContainerBuilder();
 
             builder.Register(c => new MongoContext(
@@ -44,8 +52,8 @@ namespace DrinkUp.WebApi {
             return new AutofacServiceProvider(Container);
         }
 
-        public void Configure(IApplicationBuilder app, 
-            IHostingEnvironment env, 
+        public void Configure(IApplicationBuilder app,
+            IHostingEnvironment env,
             ILoggerFactory loggerFactory,
             IApplicationLifetime appLifetime) {
             app.UseMvc();
