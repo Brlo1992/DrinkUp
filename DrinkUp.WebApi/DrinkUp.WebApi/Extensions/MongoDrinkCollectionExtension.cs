@@ -2,15 +2,14 @@
 using DrinkUp.WebApi.Model.Service;
 using MongoDB.Driver;
 using System;
-using System.Linq;
-
+using System.Collections.Generic;
 
 namespace DrinkUp.WebApi.Extensions {
     public static class MongoDrinkCollectionExtension {
-        public static ServiceResult<IQueryable<Drink>> GetByCondition(this IMongoCollection<Drink> db, Drink drink) {
-            var result = new ServiceResult<IQueryable<Drink>>();
+        public static ServiceResult<IEnumerable<Drink>> GetByCondition(this IMongoCollection<Drink> db, Drink drink) {
+            var result = new ServiceResult<IEnumerable<Drink>>();
             try {
-                result.Data = db.FindSync(GetByDrink(drink)).ToList().AsQueryable();
+                result.Data = db.FindSync(GetByDrink(drink)).ToList();
             }
             catch (Exception ex) {
                 result.AddError(ex.Message);

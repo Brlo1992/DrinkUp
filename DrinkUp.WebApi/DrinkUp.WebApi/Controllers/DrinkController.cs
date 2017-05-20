@@ -1,5 +1,4 @@
 using DrinkUp.WebApi.Services;
-using DrinkUp.WebApi.Utils;
 using DrinkUp.WebApi.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -27,8 +26,10 @@ namespace DrinkUp.WebApi.Controllers {
         }
 
         [HttpGet]
-        public IActionResult Get() =>
-            responseService.GetResponse(drinkService.GetAll());
+        public async Task<IActionResult> Get() {
+            var result = await drinkService.GetAll();
+            return responseService.GetResponse(result);
+        }
 
         //Add one
         [HttpPost]

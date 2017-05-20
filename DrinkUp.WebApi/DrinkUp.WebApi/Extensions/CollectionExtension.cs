@@ -11,7 +11,7 @@ namespace DrinkUp.WebApi.Extensions {
         public static bool IsOneSelected<T>(this IEnumerable<T> collection) {
             var enumerable = collection as IList<T> ?? collection.ToList();
             return enumerable.IsNotEmpty() &&
-                   enumerable.Count.IsEqualTo();
+                   enumerable.Count.IsEqualTo((int)IntValues.One);
         }
 
         public static bool IsManySelected<T>(this IEnumerable<T> collection) {

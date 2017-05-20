@@ -11,10 +11,10 @@ namespace DrinkUp.Tests {
     public class UnitTest1
     {
         [Fact]
-        public void should_get_all_rows_from_database() {
+        public async Task should_get_all_rows_from_database() {
             var db = GetDbSubstitutes();
 
-            var result = db.GetAll();
+            var result = await db.GetAll();
 
             Assert.NotNull(result);
             Assert.NotNull(result.Data);
@@ -39,8 +39,8 @@ namespace DrinkUp.Tests {
             return db;
         }
 
-        private ServiceResult<IQueryable<Drink>> GetSampleDrinks() {
-            var result = new ServiceResult<IQueryable<Drink>>() {
+        private ServiceResult<IEnumerable<Drink>> GetSampleDrinks() {
+            var result = new ServiceResult<IEnumerable<Drink>>() {
                 Data = new List<Drink> {
                     new Drink { Name = "testowy1"},
                     new Drink { Name = "testowy2"},

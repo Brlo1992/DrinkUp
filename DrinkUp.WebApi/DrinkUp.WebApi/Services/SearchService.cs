@@ -1,4 +1,5 @@
-﻿using DrinkUp.WebApi.Context;
+﻿using System.Collections.Generic;
+using DrinkUp.WebApi.Context;
 using DrinkUp.WebApi.Model.Service;
 using DrinkUp.WebApi.ViewModels;
 using System.Linq;
@@ -6,7 +7,7 @@ using DrinkUp.WebApi.Model;
 
 namespace DrinkUp.WebApi.Services {
     public interface ISearchService {
-        ServiceResult<IQueryable<SearchResultViewModel>> Search(SearchViewModel viewModel);
+        ServiceResult<IEnumerable<SearchResultViewModel>> Search(SearchViewModel viewModel);
     }
 
     public class SearchService : ISearchService {
@@ -16,15 +17,15 @@ namespace DrinkUp.WebApi.Services {
             this.db = db;
         }
 
-        public ServiceResult<IQueryable<SearchResultViewModel>> Search(SearchViewModel viewModel = null) {
+        public ServiceResult<IEnumerable<SearchResultViewModel>> Search(SearchViewModel viewModel = null) {
             var model = GetFromViewModel(viewModel);
             var result = db.GetByCondition(model);
             var formatedResult = GetFormatedResult(result);
             return formatedResult;
         }
 
-        private ServiceResult<IQueryable<SearchResultViewModel>> GetFormatedResult(ServiceResult<IQueryable<Drink>> result) {
-            var formatedResult = new ServiceResult<IQueryable<SearchResultViewModel>> {
+        private ServiceResult<IEnumerable<SearchResultViewModel>> GetFormatedResult(ServiceResult<IEnumerable<Drink>> result) {
+            var formatedResult = new ServiceResult<IEnumerable<SearchResultViewModel>> {
                 Data = result.Data.Select(x => new SearchResultViewModel {
                     Name = x.Name
                 })
