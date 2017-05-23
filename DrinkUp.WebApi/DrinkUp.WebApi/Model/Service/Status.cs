@@ -9,6 +9,7 @@
         AlreadyExist,
         NotExist,
         FindMoreThanOne,
-        NameAlreadyExist
+        NameAlreadyExist,
+        Registred
     }
 }

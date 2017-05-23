@@ -13,7 +13,6 @@
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="1.0.0-msbuild3-final" />
     <Folder Include="AppData\" />
-    <Folder Include="Controllers\" />
     <Folder Include="AppData\" />
   </ItemGroup>
   <ItemGroup>

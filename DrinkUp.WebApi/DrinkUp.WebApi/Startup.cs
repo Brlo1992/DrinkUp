@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using DrinkUp.WebApi.Context;
+using DrinkUp.WebApi.Model.Identity;
 using DrinkUp.WebApi.Services;
 using DrinkUp.WebApi.Utils;
 using Microsoft.AspNetCore.Builder;
@@ -10,7 +11,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace DrinkUp.WebApi {
     public class Startup {
@@ -32,11 +32,36 @@ namespace DrinkUp.WebApi {
             services.AddCors();
             services
                 .AddEntityFrameworkSqlServer()
-                .AddDbContext<IdentityContext>(options => {
-                    options.UseSqlServer(ConfigrationProvider.GetIdentityConnection(Configuration));                    
+                .AddDbContext<AuthorizationContext>(options => {
+                    options.UseSqlServer(ConfigrationProvider.GetIdentityConnection(Configuration));
                 });
-            services.AddIdentity<IdentityUser, IdentityRole>();
+            services
+                .AddIdentity<User, Role>()
+                .AddEntityFrameworkStores<AuthorizationContext>()
+                .AddDefaultTokenProviders();
             var builder = new ContainerBuilder();
+
+            services.Configure<IdentityOptions>(options =>
+            {
+                // Password settings
+                options.Password.RequireDigit = true;
+                options.Password.RequiredLength = 8;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = true;
+                options.Password.RequireLowercase = false;
+
+                // Lockout settings
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(30);
+                options.Lockout.MaxFailedAccessAttempts = 10;
+
+                // Cookie settings
+                options.Cookies.ApplicationCookie.ExpireTimeSpan = TimeSpan.FromDays(10);
+                options.Cookies.ApplicationCookie.LoginPath = "/Account/LogIn";
+                options.Cookies.ApplicationCookie.LogoutPath = "/Account/LogOut";
+
+                // User settings
+                options.User.RequireUniqueEmail = true;
+            });
 
             builder.Register(c => new MongoContext(
                     ConfigrationProvider.GetMongoConnection(Configuration),
