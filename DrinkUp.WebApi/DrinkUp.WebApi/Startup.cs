@@ -41,14 +41,30 @@ namespace DrinkUp.WebApi {
                 .AddDefaultTokenProviders();
             var builder = new ContainerBuilder();
 
-            services.Configure<IdentityOptions>(options =>
-            {
-                // Password settings
+            services.Configure(ConfigureIdentityOptions());
+
+            builder.Register(c => new MongoContext(
+                    ConfigrationProvider.GetMongoConnection(Configuration),
+                    ConfigrationProvider.GetMongoCollection(Configuration)))
+                .AsImplementedInterfaces();
+            builder.RegisterType<SearchService>().AsImplementedInterfaces();
+            builder.RegisterType<DrinkService>().AsImplementedInterfaces();
+            builder.RegisterType<ResponseService>().AsImplementedInterfaces();
+            builder.RegisterType<AccountService>().AsImplementedInterfaces();
+            builder.Populate(services);
+
+            Container = builder.Build();
+
+            return new AutofacServiceProvider(Container);
+        }
+
+        private Action<IdentityOptions> ConfigureIdentityOptions() {
+            return options => {
                 options.Password.RequireDigit = true;
-                options.Password.RequiredLength = 8;
-                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequiredLength = 3;
+                options.Password.RequireNonAlphanumeric = true;
                 options.Password.RequireUppercase = true;
-                options.Password.RequireLowercase = false;
+                options.Password.RequireLowercase = true;
 
                 // Lockout settings
                 options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(30);
@@ -61,27 +77,14 @@ namespace DrinkUp.WebApi {
 
                 // User settings
                 options.User.RequireUniqueEmail = true;
-            });
-
-            builder.Register(c => new MongoContext(
-                    ConfigrationProvider.GetMongoConnection(Configuration),
-                    ConfigrationProvider.GetMongoCollection(Configuration)))
-                .AsImplementedInterfaces();
-            builder.RegisterType<SearchService>().AsImplementedInterfaces();
-            builder.RegisterType<DrinkService>().AsImplementedInterfaces();
-            builder.RegisterType<ResponseService>().AsImplementedInterfaces();
-            builder.Populate(services);
-
-            Container = builder.Build();
-
-            return new AutofacServiceProvider(Container);
+            };
         }
 
-        public void Configure(IApplicationBuilder app,
-            IHostingEnvironment env,
-            ILoggerFactory loggerFactory,
-            IApplicationLifetime appLifetime) {
+        public void Configure(IApplicationBuilder app, IApplicationLifetime appLifetime) {
+            app.UseCookieAuthentication();
+            app.UseIdentity();
             app.UseMvc();
+
             appLifetime.ApplicationStopped.Register(() => Container.Dispose());
         }
     }

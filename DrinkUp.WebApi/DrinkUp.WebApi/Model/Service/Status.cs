@@ -10,6 +10,8 @@
         NotExist,
         FindMoreThanOne,
         NameAlreadyExist,
-        Registred
+        Registred,
+        LoggedIn,
+        LoggedOut
     }
 }

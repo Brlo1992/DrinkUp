@@ -9,7 +9,11 @@ namespace DrinkUp.WebApi.Context {
     }
 
     public class AuthorizationContext : IdentityDbContext<User>, IAuthorizationContext {
+        public AuthorizationContext(DbContextOptions options)
+            : base(options) { }
+
         public DbSet<User> Users { get; set; }
+
         public DbSet<Role> Roles { get; set; }
     }
 }
