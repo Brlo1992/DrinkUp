@@ -2,10 +2,12 @@ using DrinkUp.WebApi.Services;
 using DrinkUp.WebApi.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DrinkUp.WebApi.Controllers {
     [Produces("application/json")]
     [Route("api/drink")]
+    [Authorize]
     public class DrinkController : Controller {
         private readonly IDrinkService drinkService;
         private readonly IResponseService responseService;

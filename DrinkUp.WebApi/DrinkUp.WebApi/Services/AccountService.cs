@@ -30,7 +30,6 @@ namespace DrinkUp.WebApi.Services {
             var user = GetFromViewModel(viewModel);
             try {
                 var dbResult = await userManager.CreateAsync(user, viewModel.Password);
-
                 if (dbResult.Succeeded) {
                     await signInManager.SignInAsync(user, false);
                     result.Status = nameof(Status.Registred);
