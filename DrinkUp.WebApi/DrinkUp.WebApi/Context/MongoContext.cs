@@ -1,15 +1,16 @@
 ﻿using DrinkUp.WebApi.Extensions;
 using DrinkUp.WebApi.Model;
 using DrinkUp.WebApi.Model.Service;
+using DrinkUp.WebApi.ViewModels;
 using MongoDB.Driver;
-using System.Linq;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace DrinkUp.WebApi.Context {
     public interface IMongoContext {
-        ServiceResult<IQueryable<Drink>> GetAll();
+        Task<ServiceResult<IEnumerable<Drink>>> GetAll();
 
-        ServiceResult<IQueryable<Drink>> GetByCondition(Drink drink);
+        ServiceResult<IEnumerable<Drink>> GetByCondition(Drink drink);
 
         Task<ServiceResult<Drink>> GetSingle(string id);
 
@@ -17,27 +18,28 @@ namespace DrinkUp.WebApi.Context {
 
         Task<ServiceResult> Remove(string id);
 
-        Task<ServiceResult> Update(Drink drink);
+        Task<ServiceResult> Update(DrinkViewModel viewModel, UpdateDefinition<Drink> updateDefinition);
     }
 
     public class MongoContext : IMongoContext {
         private readonly MongoDatabaseBase db;
 
-        public MongoContext() {
-            var client = new MongoClient("mongodb://localhost:27017");
-            db = client.GetDatabase("DrinkUpDb") as MongoDatabaseBase;
+        public MongoContext(string mongoConnection, string mongoCollection) {
+            var client = new MongoClient(mongoConnection);
+            db = client.GetDatabase(mongoCollection) as MongoDatabaseBase;
         }
 
-        public ServiceResult<IQueryable<Drink>> GetAll() => Drinks.GetMany();
+        public async Task<ServiceResult<IEnumerable<Drink>>> GetAll() => await Drinks.GetMany();
 
-        public ServiceResult<IQueryable<Drink>> GetByCondition(Drink drink) => Drinks.GetByCondition(drink);
+        public ServiceResult<IEnumerable<Drink>> GetByCondition(Drink drink) => Drinks.GetByCondition(drink);
 
-        public async Task<ServiceResult<Drink>> GetSingle(string name) => await Drinks.GetSingle(name);
-               
+        public async Task<ServiceResult<Drink>> GetSingle(string id) => await Drinks.GetSingle(id);
+
         public async Task<ServiceResult> Insert(Drink drink) => await Drinks.TryInsert(drink);
-               
-        public async Task<ServiceResult> Update(Drink drink) => await Drinks.TryUpdate(drink);
-               
+
+        public async Task<ServiceResult> Update(DrinkViewModel viewModel, UpdateDefinition<Drink> updateDefinition) => await Drinks
+            .TryUpdate(viewModel, updateDefinition);
+
         public async Task<ServiceResult> Remove(string id) => await Drinks.TryDelete(id);
 
         private IMongoCollection<Drink> Drinks => db.GetCollection<Drink>("Drinks");

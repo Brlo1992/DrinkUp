@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using DrinkUp.WebApi.Services;
-using DrinkUp.WebApi.Utils;
 using DrinkUp.WebApi.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -20,17 +19,19 @@ namespace DrinkUp.WebApi.Controllers {
             this.responseService = responseService;
         }
 
-        [HttpGet("{name}", Name = "GetById")]
-        public async Task<IActionResult> Get(string name) {
-            var result = await drinkService.GetSingle(new NameViewModel {
-                Name = name
+        [HttpGet("{objectId}", Name = "GetById")]
+        public async Task<IActionResult> Get(string objectId) {
+            var result = await drinkService.GetSingle(new IdentityViewModel {
+                Id = objectId
             });
             return responseService.GetResponse(result);
         }
 
         [HttpGet]
-        public IActionResult Get() =>
-            responseService.GetResponse(drinkService.GetAll());
+        public async Task<IActionResult> Get() {
+            var result = await drinkService.GetAll();
+            return responseService.GetResponse(result);
+        }
 
         //Add one
         [HttpPost]
