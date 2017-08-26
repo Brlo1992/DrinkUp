@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace DrinkUp.WebApi {
@@ -29,7 +30,7 @@ namespace DrinkUp.WebApi {
 
         public IServiceProvider ConfigureServices(IServiceCollection services) {
             services.AddMvc();
-            services.AddCors();
+            services.AddCors(options => { options.AddPolicy("dev", GetCorsPolicy()); });
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info { Title = "My API", Version = "v1" });
@@ -90,6 +91,7 @@ namespace DrinkUp.WebApi {
         public void Configure(IApplicationBuilder app, IApplicationLifetime appLifetime) {
             app.UseCookieAuthentication();
             app.UseIdentity();
+            app.UseCors("dev");
             app.UseMvc();
             app.UseSwagger();
             app.UseSwaggerUI(c =>
@@ -97,6 +99,15 @@ namespace DrinkUp.WebApi {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
             });
             appLifetime.ApplicationStopped.Register(() => Container.Dispose());
+        }
+
+        private CorsPolicy GetCorsPolicy() {
+            var corsBuilder = new CorsPolicyBuilder();
+            corsBuilder.AllowAnyHeader();
+            corsBuilder.AllowAnyMethod();
+            corsBuilder.AllowCredentials();
+            corsBuilder.AllowAnyOrigin();
+            return corsBuilder.Build();
         }
     }
 }
