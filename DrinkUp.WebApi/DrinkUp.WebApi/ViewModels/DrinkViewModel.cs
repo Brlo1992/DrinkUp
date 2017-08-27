@@ -7,5 +7,7 @@ namespace DrinkUp.WebApi.ViewModels {
         public string Description { get; set; }
         public IList<string> Ingredients { get; set; }
         public string Glass { get; set; }
+        public int Like { get; set; }
+        public int Unlike { get; set; }
     }
 }

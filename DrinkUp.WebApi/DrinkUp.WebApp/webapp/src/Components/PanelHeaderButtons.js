@@ -1,25 +1,46 @@
 import React from 'react';
-import { Row, Col, Button } from 'react-bootstrap';
+import { Row, Col, Button, Glyphicon } from 'react-bootstrap';
 import axios from 'axios';
 
-const Like = (name) => {
-    
-};
+export default class PanelHeaderButtons extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            name: props.drink.name,
+            like: props.drink.like,
+            unlike: props.drink.unlike,
+        }
+    };
 
-const Unlike = (name) => {
-    
-};
+    Like = () => {
+        axios.put()
+            .then(this.setState((prevState, props) => ({
+                like: prevState.like + 1
+            })));
+    };
 
-const PanelHeaderButtons = (props) => <Row>
-    <Col lg={8}>
-        <h5>{props.name}</h5>
-    </Col>
-    <Col lg={2}>
-        <Button bsStyle="success" block>Like</Button>
-    </Col>
-    <Col lg={2}>
-        <Button bsStyle="danger" block>Unlike</Button>
-    </Col>
-</Row>
+    Unlike = () => {
+        axios.put()
+            .then(this.setState((prevState, props) => ({
+                unlike: prevState.unlike + 1
+            })));
+    };
 
-export default PanelHeaderButtons;
+    render() {
+        return <Row>
+            <Col lg={8}>
+                <h5>{this.state.name}</h5>
+            </Col>
+            <Col lg={2}>
+                <Button bsStyle="success" block onClick={this.Like}>
+                    Like <Glyphicon glyph="heart-empty" /> {this.state.like}
+                </Button>
+            </Col>
+            <Col lg={2}>
+                <Button bsStyle="danger" block onClick={this.Unlike}>
+                    Unlike <Glyphicon glyph="flash" />{this.state.unlike}
+                </Button>
+            </Col>
+        </Row>
+    }
+}

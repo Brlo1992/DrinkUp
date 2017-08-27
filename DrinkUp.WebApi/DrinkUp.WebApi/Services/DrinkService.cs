@@ -87,7 +87,9 @@ namespace DrinkUp.WebApi.Services {
             Description = model.Description,
             Id = model.Id.ToString(),
             Glass = model.Glass,
-            Ingredients = model.Ingredients
+            Ingredients = model.Ingredients,
+            Like = model.IsGood,
+            Unlike = model.IsGood
         };
     }
 }
