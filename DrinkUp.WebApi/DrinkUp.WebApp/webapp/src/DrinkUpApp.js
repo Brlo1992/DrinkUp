@@ -29,13 +29,27 @@ const containerStyle = {
 export default class DrinkUpApp extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            drinks: [],
+            contentLoaded: false,
+            searchedDrinks: []
+        };
+        this.selectDrinks = this.selectDrinks.bind(this);
     };
 
-    handleClick = (name) => {
-        // axios.get("http://localhost:58785/api/drink")
-        //     .then(response => this.setState({
-        //         drinks: response.Data
-        //     }));
+    componentDidMount() {
+        axios.get("http://localhost:58785/api/drink")
+            .then(response => this.setState({
+                drinks: response.data.data,
+                contentLoaded: true,
+                searchedDrinks: response.data.data
+            }));
+    };
+
+    selectDrinks(value) {
+        this.setState({
+            searchedDrinks: this.state.drinks.filter(drink => drink.name.includes(value))
+        });
     };
 
     render() {
@@ -44,9 +58,9 @@ export default class DrinkUpApp extends Component {
                 <h1 style={headerStyle}>Drink Up React Client</h1>
             </div>
             <div style={containerStyle}>
-                <SearchBox onClick={this.handleClick} />
+                <SearchBox selectDrinks={this.selectDrinks} />
                 <br />
-                <DrinkList/>
+                <DrinkList drinks={this.state.searchedDrinks} loaded={this.state.contentLoaded} />
             </div>
         </div >;
     };

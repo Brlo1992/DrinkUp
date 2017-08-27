@@ -8,19 +8,21 @@ const style = {
 export default class SearchBox extends React.Component {
     constructor(props) {
         super(props)
+        this.state = {
+            searchName: ""
+        };
+        this.handleChange = this.handleChange.bind(this);
     };
 
-    handleClick = (name) => {
-        axios.get();
+    handleChange(event) {
+        this.setState({ searchName: event.target.value });
+        this.props.selectDrinks(event.target.value);
     };
 
     render() {
         return <Row>
-            <Col lg={10} style={style}>
-                <FormControl type="text"></FormControl>
-            </Col>
-            <Col lg={2}>
-                <Button bsStyle="primary" block>Szukaj</Button>
+            <Col lg={12} style={style}>
+                <FormControl type="text" value={this.state.searchName} onChange={this.handleChange}></FormControl>
             </Col>
         </Row>;
     };
