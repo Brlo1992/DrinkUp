@@ -55,6 +55,7 @@ namespace DrinkUp.WebApi {
                     ConfigrationProvider.GetMongoConnection(Configuration),
                     ConfigrationProvider.GetMongoCollection(Configuration)))
                 .AsImplementedInterfaces();
+            builder.RegisterType<RateService>().AsImplementedInterfaces();
             builder.RegisterType<SearchService>().AsImplementedInterfaces();
             builder.RegisterType<DrinkService>().AsImplementedInterfaces();
             builder.RegisterType<ResponseService>().AsImplementedInterfaces();

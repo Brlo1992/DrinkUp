@@ -8,7 +8,7 @@
     "react-scripts": "1.0.11"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "set REACT_APP_DRINK_API_LOCAL=http://localhost:58786/&&react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"

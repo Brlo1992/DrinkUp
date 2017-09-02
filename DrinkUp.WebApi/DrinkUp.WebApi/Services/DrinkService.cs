@@ -68,11 +68,12 @@ namespace DrinkUp.WebApi.Services {
             var name = new StringFieldDefinition<Drink, string>(nameof(viewModel.Name));
             var description = new StringFieldDefinition<Drink, string>(nameof(viewModel.Description));
             var glass = new StringFieldDefinition<Drink, string>(nameof(viewModel.Glass));
-
             return builder
                 .Set(name, viewModel.Name)
                 .Set(description, viewModel.Description)
-                .Set(glass, viewModel.Glass);
+                .Set(glass, viewModel.Glass)
+                .Set(x => x.IsGood, viewModel.Like)
+                .Set(x => x.IsBad, viewModel.Unlike);
         }
 
         private Drink MapFromViewModel(DrinkViewModel viewModel) => new Drink {
@@ -89,7 +90,7 @@ namespace DrinkUp.WebApi.Services {
             Glass = model.Glass,
             Ingredients = model.Ingredients,
             Like = model.IsGood,
-            Unlike = model.IsGood
+            Unlike = model.IsBad
         };
     }
 }

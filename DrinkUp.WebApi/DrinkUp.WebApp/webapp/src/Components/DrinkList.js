@@ -13,7 +13,8 @@ export default class DrinkList extends React.Component {
         if (this.props.loaded === true) {
             component = <div>
                 {this.props.drinks.map((drink, index) =>
-                    <Panel key={index} header={<PanelHeaderButtons drink={drink} />} bsStyle="primary">
+                    <Panel key={index} header={<PanelHeaderButtons 
+                    drink={drink} />} bsStyle="primary">
                         <Row>
                             <Col lg={6}><h5>{drink.description}</h5></Col>
                             <Col lg={6}>

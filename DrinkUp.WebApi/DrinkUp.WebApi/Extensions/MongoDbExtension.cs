@@ -85,7 +85,7 @@ namespace DrinkUp.WebApi.Extensions {
             try {
                 var checkByNameResult = await db.Find(GetByName<T>(viewModel.Name)).ToListAsync();
 
-                if (checkByNameResult.IsEmpty()) {
+                if (checkByNameResult.IsEmpty() == false) {
                     var queryResult = await db.Find(GetById<T>(viewModel.Id)).ToListAsync();
 
                     if (queryResult.IsOneSelected()) {
@@ -97,7 +97,7 @@ namespace DrinkUp.WebApi.Extensions {
                     }
                 }
                 else {
-                    result.Status = nameof(Status.NameAlreadyExist);
+                    result.Status = nameof(Status.NotExist);
                 }
             }
             catch (Exception ex) {
